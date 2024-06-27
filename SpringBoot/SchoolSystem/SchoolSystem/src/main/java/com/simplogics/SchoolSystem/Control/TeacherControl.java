@@ -6,10 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+@RestController
+@RequestMapping("/")
 public class TeacherControl {
     @Autowired
-    TeacherService TeacherService;
+    private TeacherService TeacherService;
 
     @PostMapping("/createTeacher")
     public Teacher addTeacher(@RequestBody Teacher Teacher){
@@ -26,12 +27,12 @@ public class TeacherControl {
         return TeacherService.getTeacherById(id);
     }
 
-    @GetMapping("/getAll")
+    @GetMapping("/getAllTeachers")
     public List<Teacher> getTeachers(){
         return TeacherService.getTeachers();
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/deleteTeacher/{id}")
     public String deleteTeacher(@PathVariable Integer id){
         return TeacherService.deleteTeacher(id);
     }

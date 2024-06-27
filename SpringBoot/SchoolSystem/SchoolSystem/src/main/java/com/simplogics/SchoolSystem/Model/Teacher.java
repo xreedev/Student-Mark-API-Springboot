@@ -12,7 +12,10 @@ import java.util.List;
 @Table
 public class Teacher {
     @Id
+//    @Column(name = "teacherId")
     private Integer teacherId;
+
+    @Column(name = "name")
     private String name;
 
     @ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
@@ -20,5 +23,4 @@ public class Teacher {
             joinColumns = @JoinColumn(name = "studentId"),
             inverseJoinColumns = @JoinColumn(name = "teacherId"))
     private List<Student> students;
-
 }
