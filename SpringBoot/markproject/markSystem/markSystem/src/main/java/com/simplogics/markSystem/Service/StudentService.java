@@ -40,6 +40,8 @@ public class StudentService {
         StudentDTO dto = toDTO(studentRepository.save(student));
         return dto;
     }
+
+
     public StudentDTO toDTO(Student S){
         StudentDTO studentDTO=new StudentDTO();
         studentDTO.setName(S.getName());

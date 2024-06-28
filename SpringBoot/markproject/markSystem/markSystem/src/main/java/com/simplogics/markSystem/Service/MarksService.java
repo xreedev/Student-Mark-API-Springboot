@@ -1,12 +1,16 @@
 package com.simplogics.markSystem.Service;
 
 import com.simplogics.markSystem.DTO.MarkDTO;
+import com.simplogics.markSystem.DTO.MarkSubDto;
 import com.simplogics.markSystem.Model.Marks;
 import com.simplogics.markSystem.Repository.MarksRepository;
 import com.simplogics.markSystem.Repository.StudentRepository;
 import com.simplogics.markSystem.Repository.SubjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class MarksService {
@@ -44,6 +48,49 @@ public class MarksService {
         return mDTO;
     }
 
+    public List<MarkSubDto> getBySub(Integer S){
+        List<MarkSubDto> mDTO =new ArrayList<>();
+        marksRepository.findAll().forEach(marks -> {
+            if (marks.getSubject().getSubId().equals(S)) {
+                MarkSubDto markSub=new MarkSubDto();
+                markSub.setSubName(marks.getSubject().getSubName());
+                markSub.setStudName(marks.getStudent().getName());
+                markSub.setMarks(marks.getMark());
+                mDTO.add(markSub);
+            }
+        });
+
+       return mDTO;
+    }
+    public List<MarkSubDto> getByName(String name){
+        List<MarkSubDto> mDTO =new ArrayList<>();
+        marksRepository.findAll().forEach(marks -> {
+            if (marks.getStudent().getName().equals(name)) {
+                MarkSubDto markSub=new MarkSubDto();
+                markSub.setSubName(marks.getSubject().getSubName());
+                markSub.setStudName(marks.getStudent().getName());
+                markSub.setMarks(marks.getMark());
+                mDTO.add(markSub);
+            }
+        });
+
+
+
+        return mDTO;
+    }
+    public List<MarkSubDto> filterByRange(Integer range) {
+        List<MarkSubDto> mDTO = new ArrayList<>();
+        marksRepository.findAll().forEach(marks -> {
+            if (marks.getMark() >= range) {
+                MarkSubDto markSub = new MarkSubDto();
+                markSub.setSubName(marks.getSubject().getSubName());
+                markSub.setStudName(marks.getStudent().getName());
+                markSub.setMarks(marks.getMark());
+                mDTO.add(markSub);
+            }
+        });
+        return mDTO;
+    }
     public String deleteMarks(Integer id) {
         marksRepository.deleteById(id);
         return "Mark Deleted";
