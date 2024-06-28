@@ -1,8 +1,6 @@
 package com.simplogics.markSystem.Service;
 
-import com.simplogics.markSystem.DTO.MarkDTO;
 import com.simplogics.markSystem.DTO.StudentDTO;
-import com.simplogics.markSystem.Model.Marks;
 import com.simplogics.markSystem.Model.Student;
 import com.simplogics.markSystem.Repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,12 +10,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class StudentService {
+public class StudentService implements IStudentService{
 
     @Autowired
     private StudentRepository studentRepository;
 
 
+    @Override
     public List<StudentDTO> getStudentByName(String name){
         List<StudentDTO> studentList=new ArrayList<>();
         studentRepository.findAll().forEach(student -> {
@@ -29,10 +28,12 @@ public class StudentService {
 
         return studentList;
     }
+    @Override
     public StudentDTO getStudentById(Integer id){
         return toDTO(studentRepository.findById(id).orElse(null));
     }
 
+    @Override
     public StudentDTO createStudent(StudentDTO S){
 
         Student student=new Student();
@@ -42,12 +43,14 @@ public class StudentService {
     }
 
 
+    @Override
     public StudentDTO toDTO(Student S){
         StudentDTO studentDTO=new StudentDTO();
         studentDTO.setName(S.getName());
 
         return studentDTO;
     }
+    @Override
     public String deleteStudent(Integer id){
         studentRepository.delete(studentRepository.findById(id).orElse(null));
         return "Student Deleted";

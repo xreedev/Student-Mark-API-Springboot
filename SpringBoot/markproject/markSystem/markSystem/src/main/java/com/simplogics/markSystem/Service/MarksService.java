@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class MarksService {
+public class MarksService implements IMarksService {
 
     @Autowired
     private MarksRepository marksRepository;
@@ -24,6 +24,7 @@ public class MarksService {
     @Autowired
     private SubjectRepository subjectRepository;
 
+    @Override
     public MarkDTO createMarks(MarkDTO M) {
         Marks marks = new Marks();
         marks.setMark(M.getMarks());
@@ -40,6 +41,7 @@ public class MarksService {
         return toDTO(savedMarks);
     }
 
+    @Override
     public MarkDTO toDTO(Marks M) {
         MarkDTO mDTO = new MarkDTO();
         mDTO.setMarks(M.getMark());
@@ -48,6 +50,7 @@ public class MarksService {
         return mDTO;
     }
 
+    @Override
     public List<MarkSubDto> getBySub(Integer S){
         List<MarkSubDto> mDTO =new ArrayList<>();
         marksRepository.findAll().forEach(marks -> {
@@ -62,6 +65,7 @@ public class MarksService {
 
        return mDTO;
     }
+    @Override
     public List<MarkSubDto> getByName(String name){
         List<MarkSubDto> mDTO =new ArrayList<>();
         marksRepository.findAll().forEach(marks -> {
@@ -78,6 +82,8 @@ public class MarksService {
 
         return mDTO;
     }
+
+    @Override
     public List<MarkSubDto> filterByRange(Integer range) {
         List<MarkSubDto> mDTO = new ArrayList<>();
         marksRepository.findAll().forEach(marks -> {
@@ -91,6 +97,8 @@ public class MarksService {
         });
         return mDTO;
     }
+
+    @Override
     public String deleteMarks(Integer id) {
         marksRepository.deleteById(id);
         return "Mark Deleted";

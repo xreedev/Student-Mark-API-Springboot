@@ -1,8 +1,7 @@
 package com.simplogics.markSystem.Control;
 
 import com.simplogics.markSystem.DTO.StudentDTO;
-import com.simplogics.markSystem.Model.Student;
-import com.simplogics.markSystem.Service.StudentService;
+import com.simplogics.markSystem.Service.IStudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,7 +12,7 @@ import java.util.List;
 public class StudentControl {
 
     @Autowired
-    private StudentService studentService;
+    private IStudentService studentService;
 
     @GetMapping("/name/{name}")
     public List<StudentDTO> getStudByName(@PathVariable String name){

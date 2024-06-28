@@ -1,8 +1,7 @@
 package com.simplogics.markSystem.Control;
 
 import com.simplogics.markSystem.DTO.SubjectDTO;
-import com.simplogics.markSystem.Model.Subject;
-import com.simplogics.markSystem.Service.SubjectService;
+import com.simplogics.markSystem.Service.ISubjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 public class SubjectControl {
 
     @Autowired
-    private SubjectService subjectService;
+    private ISubjectService subjectService;
 
     @GetMapping("/{id}")
     public SubjectDTO getSubject(@PathVariable Integer id){

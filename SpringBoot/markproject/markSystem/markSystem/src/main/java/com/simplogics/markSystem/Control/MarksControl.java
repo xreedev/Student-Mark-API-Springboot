@@ -2,8 +2,7 @@ package com.simplogics.markSystem.Control;
 
 import com.simplogics.markSystem.DTO.MarkDTO;
 import com.simplogics.markSystem.DTO.MarkSubDto;
-import com.simplogics.markSystem.Model.Marks;
-import com.simplogics.markSystem.Service.MarksService;
+import com.simplogics.markSystem.Service.IMarksService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,7 +13,7 @@ import java.util.List;
 public class MarksControl {
 
     @Autowired
-    private MarksService marksService;
+    private IMarksService marksService;
 
     @GetMapping("/sub/{id}")
     public List<MarkSubDto> getMarkBySub(@PathVariable Integer id){return marksService.getBySub(id);}
