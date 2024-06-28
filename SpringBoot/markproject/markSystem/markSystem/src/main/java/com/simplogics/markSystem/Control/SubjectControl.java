@@ -1,5 +1,6 @@
 package com.simplogics.markSystem.Control;
 
+import com.simplogics.markSystem.DTO.SubjectDTO;
 import com.simplogics.markSystem.Model.Subject;
 import com.simplogics.markSystem.Service.SubjectService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,17 +14,17 @@ public class SubjectControl {
     private SubjectService subjectService;
 
     @GetMapping("/{id}")
-    public Subject getSubject(@PathVariable Integer id){
+    public SubjectDTO getSubject(@PathVariable Integer id){
         return subjectService.getSubjectById(id);
     }
 
     @PostMapping("/")
-    public Subject createSubject(@RequestBody Subject S){
+    public SubjectDTO createSubject(@RequestBody SubjectDTO S){
         return subjectService.createSubject(S);
     }
 
    @PutMapping("/")
-   public Subject updateSubject(@RequestBody Subject S){
+   public SubjectDTO updateSubject(@RequestBody SubjectDTO S){
        return subjectService.createSubject(S);
    }
 

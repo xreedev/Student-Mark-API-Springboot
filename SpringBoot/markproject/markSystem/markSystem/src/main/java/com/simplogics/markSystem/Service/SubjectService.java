@@ -1,5 +1,6 @@
 package com.simplogics.markSystem.Service;
 
+import com.simplogics.markSystem.DTO.SubjectDTO;
 import com.simplogics.markSystem.Model.Subject;
 import com.simplogics.markSystem.Repository.MarksRepository;
 import com.simplogics.markSystem.Repository.SubjectRepository;
@@ -12,14 +13,23 @@ public class SubjectService {
     @Autowired
     private SubjectRepository subjectRepository;
 
-    public Subject createSubject(Subject S){
+    public SubjectDTO createSubject(SubjectDTO S){
 
-        return subjectRepository.save(S);
+        Subject sub=new Subject();
+        sub.setSubName(S.getSubName());
+        return toDto(subjectRepository.save(sub));
+    }
+    public SubjectDTO toDto(Subject S){
+        SubjectDTO sDto=new SubjectDTO();
+        sDto.setSubName(S.getSubName());
+        return sDto;
     }
 
-    public Subject getSubjectById(Integer id){
+    public SubjectDTO getSubjectById(Integer id){
 
-        return subjectRepository.findById(id).orElse(null);
+       SubjectDTO subjectDTO=new SubjectDTO();
+       subjectDTO.setSubName(subjectRepository.findById(id).orElse(null).getSubName());
+       return subjectDTO;
     }
 
     public String deleteSubject(Integer id){
