@@ -1,7 +1,9 @@
 package com.simplogics.markSystem.Service;
 
 import com.simplogics.markSystem.DTO.StudentDTO;
+import com.simplogics.markSystem.Model.StdClass;
 import com.simplogics.markSystem.Model.Student;
+import com.simplogics.markSystem.Repository.StdClassRepository;
 import com.simplogics.markSystem.Repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,6 +17,8 @@ public class StudentService implements IStudentService{
     @Autowired
     private StudentRepository studentRepository;
 
+    @Autowired
+    private StdClassRepository stdClassRepository;
 
     @Override
     public List<StudentDTO> getStudentByName(String name){
@@ -38,8 +42,11 @@ public class StudentService implements IStudentService{
 
         Student student=new Student();
         student.setName(S.getName());
-        StudentDTO dto = toDTO(studentRepository.save(student));
-        return dto;
+
+        StdClass stdClass=stdClassRepository.findById(S.getCId()).orElseThrow(()-> new RuntimeException("Invalid Class"));
+        student.setStd(stdClass);
+        //StudentDTO dto = toDTO(studentRepository.save(student));
+        return toDTO(studentRepository.save(student));
     }
 
 
@@ -47,7 +54,7 @@ public class StudentService implements IStudentService{
     public StudentDTO toDTO(Student S){
         StudentDTO studentDTO=new StudentDTO();
         studentDTO.setName(S.getName());
-
+        studentDTO.setCId(S.getStd().getClassid());
         return studentDTO;
     }
     @Override

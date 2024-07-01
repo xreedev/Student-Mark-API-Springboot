@@ -3,7 +3,9 @@ package com.simplogics.markSystem.Service;
 import com.simplogics.markSystem.DTO.MarkDTO;
 import com.simplogics.markSystem.DTO.MarkSubDto;
 import com.simplogics.markSystem.Model.Marks;
+import com.simplogics.markSystem.Model.StdClass;
 import com.simplogics.markSystem.Repository.MarksRepository;
+import com.simplogics.markSystem.Repository.StdClassRepository;
 import com.simplogics.markSystem.Repository.StudentRepository;
 import com.simplogics.markSystem.Repository.SubjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +26,9 @@ public class MarksService implements IMarksService {
     @Autowired
     private SubjectRepository subjectRepository;
 
+    @Autowired
+    private StdClassRepository stdClassRepository;
+
     @Override
     public MarkDTO createMarks(MarkDTO M) {
         Marks marks = new Marks();
@@ -38,6 +43,7 @@ public class MarksService implements IMarksService {
 
 
         Marks savedMarks = marksRepository.save(marks);
+
         return toDTO(savedMarks);
     }
 
@@ -103,4 +109,6 @@ public class MarksService implements IMarksService {
         marksRepository.deleteById(id);
         return "Mark Deleted";
     }
+
+//    public void updateClass()
 }
