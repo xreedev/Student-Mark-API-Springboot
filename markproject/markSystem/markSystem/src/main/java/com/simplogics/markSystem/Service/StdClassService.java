@@ -16,7 +16,7 @@ import java.util.HashMap;
 import java.util.List;
 
 @Service
-public class StdClassService {
+public class StdClassService implements IStdClassService {
 
     @Autowired
     private MarksRepository marksRepository;
@@ -30,6 +30,7 @@ public class StdClassService {
     @Autowired
     private StdClassRepository stdClassRepository;
 
+    @Override
     public StdClassDTO createClass(StdClassDTO classDTO){
         StdClass stdClass=new StdClass();
         stdClass.setz
@@ -37,12 +38,14 @@ public class StdClassService {
         return toDto(studentRepository.save(stdClass));
     }
 
+    @Override
     public StdClassDTO toDto(StdClass stdClass){
         StdClassDTO stdClassDTO=new StdClassDTO();
         stdClassDTO.setMarkId(stdClass.getMarksList().getLast().getMarkId());
         return stdClassDTO;
     }
 
+    @Override
     public List<TopperDTO> findTopper(){
         List<TopperDTO> topperDTO=new ArrayList<>();
         List<StdClass> classes= new ArrayList<>();
