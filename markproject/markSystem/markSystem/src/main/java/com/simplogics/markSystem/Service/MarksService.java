@@ -3,7 +3,6 @@ package com.simplogics.markSystem.Service;
 import com.simplogics.markSystem.DTO.MarkDTO;
 import com.simplogics.markSystem.DTO.MarkSubDto;
 import com.simplogics.markSystem.Model.Marks;
-import com.simplogics.markSystem.Model.StdClass;
 import com.simplogics.markSystem.Repository.MarksRepository;
 import com.simplogics.markSystem.Repository.StdClassRepository;
 import com.simplogics.markSystem.Repository.StudentRepository;

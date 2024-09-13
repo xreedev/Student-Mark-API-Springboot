@@ -1,7 +1,6 @@
 package com.simplogics.markSystem.Service;
 
 import com.simplogics.markSystem.DTO.StudentDTO;
-import com.simplogics.markSystem.Model.StdClass;
 import com.simplogics.markSystem.Model.Student;
 import com.simplogics.markSystem.Repository.StdClassRepository;
 import com.simplogics.markSystem.Repository.StudentRepository;
